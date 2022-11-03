@@ -1,0 +1,19 @@
+{
+ "created_at": "05/05/2022 16:59:24",
+ "text": "My first Feed",
+ "source":"Postman APP",
+ "user": {
+  "id": 1,
+  "name": "Social Network API",
+  "screen_name": "SocialNetworkAPI",
+  "location": "México City, México",
+  "url": "https://t.co/8IkCzCDr19",
+  "description": "The Real Social Network API. Posts about API changes, service issues and our Developer Platform. Don't get an answer? It's on my website.",
+  "protectedProfile": null,
+  "verified": true,
+  "followers_count": 6133636,
+  "friends_count": 12,
+  "listed_count": 12936,
+  "favourites_count": 31,
+  "statuses_count": 3656}
+}
