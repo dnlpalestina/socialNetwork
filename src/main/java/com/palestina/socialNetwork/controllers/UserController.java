@@ -3,8 +3,9 @@ package com.palestina.socialNetwork.controllers;
 import java.util.Optional;
 
 import com.palestina.socialNetwork.entities.User;
-import com.palestina.socialNetwork.repositories.UserRepository;
+import com.palestina.socialNetwork.service.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,25 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
-  private final UserRepository userRepository;
 
-  public UserController(final UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
+  @Autowired
+  private UserService userService;
 
   @GetMapping("/users")
   public Iterable<User> getAllUsers() {
-    return this.userRepository.findAll();
+    return userService.findAll();
   }
 
   @GetMapping("/users/{id}")
   public Optional<User> getUserById(@PathVariable("id") Integer id) {
-    return this.userRepository.findById(id);
+    return userService.findById(id);
   }
 
   @PostMapping("/users")
   public User createNewUser(@RequestBody User user) {
-    User newUser = this.userRepository.save(user);
+    User newUser = userService.save(user);
     return newUser;
   }
 
@@ -41,7 +40,7 @@ public class UserController {
   public User updateUser(
       @PathVariable("id") Integer id,
       @RequestBody User p) {
-    Optional<User> userToUpdateOptional = this.userRepository.findById(id);
+    Optional<User> userToUpdateOptional = userService.findById(id);
     if (!userToUpdateOptional.isPresent()) {
       return null;
     }
@@ -68,18 +67,18 @@ public class UserController {
       userToUpdate.setVerified(p.getVerified());
     }
     
-    User updatedUser = this.userRepository.save(userToUpdate);
+    User updatedUser = userService.save(userToUpdate);
     return updatedUser;
   }
 
   @DeleteMapping("/users/{id}")
   public User deleteUser(@PathVariable("id") Integer id) {
-    Optional<User> userToDeleteOptional = this.userRepository.findById(id);
+    Optional<User> userToDeleteOptional = userService.findById(id);
     if (!userToDeleteOptional.isPresent()) {
       return null;
     }
     User userToDelete = userToDeleteOptional.get();
-    this.userRepository.delete(userToDelete);
+    userService.delete(userToDelete);
     return userToDelete;
   }
   

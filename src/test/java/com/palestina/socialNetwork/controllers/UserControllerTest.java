@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ import static org.mockito.Mockito.when;
 class UserControllerTest {
 
     @Mock
-    private UserRepository userRepository;
+    private UserRepository userService;
 
     @InjectMocks
     private UserController userController;
@@ -42,13 +41,13 @@ class UserControllerTest {
 
     @Test
     void getAllUsers() {
-        when(userRepository.findAll()).thenReturn(Arrays.asList(user));
+        when(userService.findAll()).thenReturn(Arrays.asList(user));
         assertNotNull(userController.getAllUsers());
     }
 
     @Test
     void getUserById() {
-        when(userRepository.findById(user.getId())).thenReturn(Optional.ofNullable(user));
+        when(userService.findById(user.getId())).thenReturn(Optional.ofNullable(user));
         assertNotNull(userController.getUserById(1));
     }
 
