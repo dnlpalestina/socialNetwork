@@ -1,27 +1,11 @@
 {
-	"name": "Post API",
-	"screen_name": "PostAPI",
+	"name": "User 2",
+	"screen_name": "New User Official 2",
 	"location": "México City, México",
-	"url": "https:\/\/t.co\/8IkCzCDr19",
-	"description": "The Real Post API. Posts about API changes, service issues and our Developer Platform. Don't get an answer? It's on my website.",
-	"entities": {
-		"url": {
-			"urls": [{
-				"url": "https:\/\/t.co\/8IkCzCDr19",
-				"expanded_url": "https:\/\/developer.twitter.com",
-				"display_url": "developer.twitter.com",
-				"indices": [
-					0,
-					23
-				]
-			}]
-		},
-		"description": {
-			"urls": []
-		}
-	},
-	"protected": true,
-	"verified": true,
+	"url": "https://developer.socialNetwork.com",
+	"description": "This is the description of a new user",
+	"protectedProfile": true,
+	"verified": false,
 	"followers_count": 6133636,
 	"friends_count": 12,
 	"listed_count": 12936,
