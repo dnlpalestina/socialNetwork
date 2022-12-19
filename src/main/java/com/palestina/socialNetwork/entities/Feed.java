@@ -1,5 +1,7 @@
 package com.palestina.socialNetwork.entities;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,6 +28,7 @@ public class Feed {
    * "created_at": "Wed Oct 10 20:19:24 +0000 2018"
    */
   @Column(name="CREATED_AT")
+  @CreatedDate
   private String created_at;
   /**
    * The actual UTF-8 text of the status update. Example:
@@ -46,7 +49,7 @@ public class Feed {
   private String source;
   /** The user who posted this Feed. */
   @ManyToOne
-  @JoinColumn(name = "USER")
+  @JoinColumn(name = "user_id")
   private User user;
 
   // /**

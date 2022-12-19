@@ -2,6 +2,8 @@ package com.palestina.socialNetwork.controllers;
 
 import java.util.Optional;
 
+import com.palestina.socialNetwork.service.FeedService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,29 +13,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palestina.socialNetwork.entities.Feed;
-import com.palestina.socialNetwork.repositories.FeedRepository;
 
 @RestController
 public class FeedController {
-  private final FeedRepository feedPRepository;
 
-  public FeedController(final FeedRepository feedPRepository) {
-    this.feedPRepository = feedPRepository;
-  }
+  @Autowired
+  private FeedService feedService;
 
   @GetMapping("/feeds")
   public Iterable<Feed> getAllFeeds() {
-    return this.feedPRepository.findAll();
+    return feedService.findAll();
   }
 
   @GetMapping("/feeds/{id}")
   public Optional<Feed> getFeedById(@PathVariable("id") Integer id) {
-    return this.feedPRepository.findById(id);
+    return feedService.findById(id);
   }
 
   @PostMapping("/feeds")
   public Feed createNewFeed(@RequestBody Feed feed) {
-    Feed newFeed = this.feedPRepository.save(feed);
+    Feed newFeed = feedService.save(feed);
     return newFeed;
   }
 
@@ -41,7 +40,7 @@ public class FeedController {
   public Feed updateFeed(
       @PathVariable("id") Integer id,
       @RequestBody Feed p) {
-    Optional<Feed> feedToUpdateOptional = this.feedPRepository.findById(id);
+    Optional<Feed> feedToUpdateOptional = feedService.findById(id);
     if (!feedToUpdateOptional.isPresent()) {
       return null;
     }
@@ -52,18 +51,18 @@ public class FeedController {
     if (p.getSource() != null) {
       feedToUpdate.setSource(p.getSource());
     }
-    Feed updatedFeed = this.feedPRepository.save(feedToUpdate);
+    Feed updatedFeed = feedService.save(feedToUpdate);
     return updatedFeed;
   }
 
   @DeleteMapping("/feeds/{id}")
   public Feed deleteFeed(@PathVariable("id") Integer id) {
-    Optional<Feed> feedToDeleteOptional = this.feedPRepository.findById(id);
+    Optional<Feed> feedToDeleteOptional = feedService.findById(id);
     if (!feedToDeleteOptional.isPresent()) {
       return null;
     }
     Feed feedToDelete = feedToDeleteOptional.get();
-    this.feedPRepository.delete(feedToDelete);
+    feedService.delete(feedToDelete);
     return feedToDelete;
   }
 }
